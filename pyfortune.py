@@ -12,9 +12,9 @@ def help():
     print()
     print("Options:    -v        - Verbose")
     print("            -f file   - Show fortune from file")
-    print("            -d dir    - Show fortune from directory")
+    print("            -d dir    - Show random fortune from directory")
     print("            -h        - Help")
-    print("            -o        - Allow offensive material, 1:10 mixin")
+    print("            -o        - Allow offensive material, 1:10 mixing ratio")
     print()
 
 # ------------------------------------------------------------------------
