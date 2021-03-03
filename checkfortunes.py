@@ -61,30 +61,26 @@ if __name__ == '__main__':
                 print("No such file:", showfile)
                 exit(3)
 
-    if showfile == "":
-        # Mix in offensive
-        if offensive:
-            if  random.random() <= 0.1:
-                if os.path.isfile(initdir + "offensive/"):
-                    initdir += "offensive/"
-                if verbose:
-                    print("Offensive random selection", initdir)
+    ddd = os.listdir(initdir)
+    if len(ddd) == 0:
+        print("No files in:", initdir)
+        exit(2)
+    lim = len(ddd)
 
-        fname = ""
-        ddd = os.listdir(initdir)
-        if len(ddd) == 0:
-            print("No files in:", initdir)
-            exit(2)
+    for fname in ddd:
+        #print("Checking:", fname)
+        try:
+            fp = open(initdir + "//" + fname, encoding='utf-8')
+        except:
+            print("Cannot open:",  fname, sys.exc_info()[1])
 
-        lim = len(ddd)
-        while lim >= 0:
-            fname = initdir + ddd[int(random.random() * len(ddd))]
-            if os.path.isfile(fname):
-                break
-            lim -= 1
-    else:
-        fname = showfile
+        try:
+            buff = fp.read()
+        except:
+            print("Cannot fread from:",  fname, sys.exc_info()[1])
 
+
+    '''
     if verbose:
         print("Listing fortune from:", fname)
 
@@ -108,4 +104,4 @@ if __name__ == '__main__':
     idx =  int(random.random() * len(buff2))
     print(buff2 [idx])
 
-
+'''
