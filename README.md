@@ -19,6 +19,9 @@ fortune directory, picking a random fortune. If the -o option is specified
 pyfortune.py mixes in fortunes that are tagged offensive. The mix ratio
 is set to one in ten, favoring normal fortunes.
 
+ The fortunes are filtered for length, ant fortune that is between 5 and 100
+characters long is presented.
+
   Please see the 'Selection' file for more description on what is deemed
 offensive. Alternatively, you may see the 'offensive' subdirectory to see
 if the fortunes exceed your audiences tolerance.
