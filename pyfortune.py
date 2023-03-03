@@ -3,6 +3,8 @@
 import os, sys, glob, getopt, time, random
 import string, signal, stat, shutil, math
 
+from fortune import *
+
 initdir =  "/usr/share/pyfortune/datfiles/"
 
 def help():
@@ -23,10 +25,18 @@ def help():
 if __name__ == '__main__':
 
     verbose     = False
-    offensive   = True
+    offensive   = False
     showfile    = ""
     startdir = os.getcwd()
     fname = ""
+
+    # Make sure we have installation, else work from source
+    if not os.path.isdir(initdir) :
+        initdir = startdir + os.sep + "datfiles" + os.sep
+
+    if not os.path.isdir(initdir) :
+        print("Cannot find init dir, giving up")
+        sys.exit(0)
 
     opts = []; args = []
     try:
@@ -61,51 +71,16 @@ if __name__ == '__main__':
                 print("No such file:", showfile)
                 exit(3)
 
-    if showfile == "":
-        # Mix in offensive
-        if offensive:
-            if  random.random() <= 0.1:
-                if os.path.isfile(initdir + "offensive/"):
-                    initdir += "offensive/"
-                if verbose:
-                    print("Offensive random selection", initdir)
+    if verbose and offensive:
+        print("Offensive random selection", initdir)
 
-        fname = ""
-        ddd = os.listdir(initdir)
-        if len(ddd) == 0:
-            print("No files in:", initdir)
-            exit(2)
+    #if verbose:
+    #    print("File:", fname)
 
-        lim = len(ddd)
-        while lim >= 0:
-            fname = initdir + ddd[int(random.random() * len(ddd))]
-            if os.path.isfile(fname):
-                break
-            lim -= 1
+    if showfile != "":
+        print("showing file", showfile)
+        fort = showfile
     else:
-        fname = showfile
-
-    if verbose:
-        print("Listing fortune from:", fname)
-
-    if not os.path.isfile(fname):
-        print("File is not a regular file:", fname)
-        exit(4)
-
-    try:
-        fp = open(fname, encoding='utf-8')
-    except:
-        print("Cannot open:",  fname, sys.exc_info()[1])
-        exit(1)
-
-    try:
-        buff = fp.read()
-    except:
-        print("Cannot fread from:",  fname, sys.exc_info()[1])
-        exit(1)
-
-    buff2 = buff.split("\n%\n")
-    idx =  int(random.random() * len(buff2))
-    print(buff2 [idx])
-
+        fort = randfortune(initdir, offensive)
+        print(fort)
 
