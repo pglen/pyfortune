@@ -34,5 +34,9 @@ exactness of the quote. Since this database is not used for profit,
 and the entire works are not published, it falls under fair use, as we
 understand it.
 
+Log:
+
+    Fri 03.Mar.2023  added local dir test for running from source dir
+
     Peter Glen
 
